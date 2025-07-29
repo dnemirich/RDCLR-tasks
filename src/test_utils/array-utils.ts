@@ -37,7 +37,21 @@ export const generateAlmostSortedArray = (
     return arr;
 };
 
+export function generateArrayWithDuplicates(size: number, uniqueFraction: number): number[] {
+    if (uniqueFraction <= 0 || uniqueFraction > 1) {
+        throw new Error("uniqueFraction должен быть в интервале (0, 1]");
+    }
+    const uniqueValuesCount = Math.max(1, Math.floor(size * uniqueFraction));
+    const uniqueValues = Array.from({ length: uniqueValuesCount }, (_, i) => i);
 
+    const result: number[] = [];
+    for (let i = 0; i < size; i++) {
+        const randomIndex = Math.floor(Math.random() * uniqueValuesCount);
+        result.push(uniqueValues[randomIndex]);
+    }
+
+    return shuffleArray(result);
+}
 
 export const measureTime = <T>(fn: () => T): [T, number] => {
     const t0 = performance.now();
