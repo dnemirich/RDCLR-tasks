@@ -59,3 +59,7 @@ export const measureTime = <T>(fn: () => T): [T, number] => {
     const t1 = performance.now();
     return [result, t1 - t0];
 }
+
+export const generateReversedArray = (size: number): number[] => {
+    return Array.from({ length: size }, (_, i) => size - i);
+}

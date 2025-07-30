@@ -1,7 +1,7 @@
 import {
     generateAlmostSortedArray,
     generateArrayWithDuplicates,
-    generateRandomArray,
+    generateRandomArray, generateReversedArray,
     measureTime
 } from "../test_utils/array-utils";
 
@@ -53,7 +53,7 @@ describe('Quick sort check', () => {
 });
 
 
-describe('Quick sort check for arrays with dublicates', () => {
+describe('Quick sort check for arrays with duplicates', () => {
     sizes.forEach(size => {
         uniqValuesFractions.forEach((fraction) => {
             test(`quick sort array of size ${size} with ${fraction} fraction of unique elements`, () => {
@@ -70,3 +70,57 @@ describe('Quick sort check for arrays with dublicates', () => {
         })
     })
 })
+
+describe('Quick sort for edge conditions', () => {
+    test('empty array', () => {
+        const input = [];
+        const [result, time] = measureTime(() => quickSort([...input]));
+        const expected = [];
+
+        console.log(`Empty array sort → ${time.toFixed(2)}ms`);
+        expect(result).toEqual(expected)
+    })
+
+    test('single element array', () => {
+        const input = [1];
+        const [result, time] = measureTime(() => quickSort([...input]));
+        const expected = [...input];
+
+        console.log(`Single element array sort → ${time.toFixed(2)}ms`);
+        expect(result).toEqual(expected)
+    })
+
+    test('array of the same elements', () => {
+        const input = [1, 1, 1, 1, 1];
+        const [result, time] = measureTime(() => quickSort([...input]));
+        const expected = [...input];
+
+        console.log(`Array of identical elements sort → ${time.toFixed(2)}ms`);
+        expect(result).toEqual(expected)
+    })
+
+    test('already sorted array', () => {
+        const input = Array.from({length: 1000}, (_, i) => i);
+        const expected = [...input];
+        const [result, time] = measureTime(() => quickSort([...input]));
+
+        console.log(`Already sorted array sort → ${time.toFixed(2)}ms`);
+        expect(result).toEqual(expected);
+    });
+})
+
+
+describe('Bubble sort performance on reversed arrays', () => {
+    sizes.forEach(size => {
+        test(`compare versions on reversed array of size ${size}`, () => {
+            const input = generateReversedArray(size);
+            const expected = [...input].sort((a, b) => a - b);
+
+            const [result, time] = measureTime(() => quickSort([...input]));
+
+            console.log(`Size: ${size} (reversed) →: ${time.toFixed(2)}ms`);
+
+            expect(result).toEqual(expected);
+        });
+    });
+});
