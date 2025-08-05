@@ -30,10 +30,10 @@
 
 /* _____________ Your Code Here _____________ */
 
-type Omit<T, K extends keyof T> = {[Property in Exclude<keyof T, K>]: T[Property]}
+type Omit<T, K extends keyof T> = { [Property in Exclude<keyof T, K>]: T[Property] }
 
 /* _____________ Test Cases _____________ */
-import type { Equal, Expect } from './utils'
+import type {Equal, Expect} from './utils'
 
 type cases = [
     Expect<Equal<Expected1, Omit<Todo, 'description'>>>,

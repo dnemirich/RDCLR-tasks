@@ -31,10 +31,10 @@
 
 /* _____________ Your Code Here _____________ */
 
-type Pick<T, K extends keyof T> = {[Property in Extract<keyof T, K>]:T[Property]}
+type Pick<T, K extends keyof T> = { [Property in Extract<keyof T, K>]: T[Property] }
 
 /* _____________ Test Cases _____________ */
-import type { Equal, Expect } from './utils'
+import type {Equal, Expect} from './utils'
 
 type cases = [
     Expect<Equal<Expected1, Pick<Todo, 'title'>>>,
