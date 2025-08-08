@@ -19,6 +19,16 @@
 
 /* _____________ Your Code Here _____________ */
 
+// Previous try:
+// type ExtractSymbols<S extends string> = S extends `${infer First}${infer Rest}`? First | ExtractSymbols<Rest>: S
+//
+// type AllCombinations<S extends string, U extends string=ExtractSymbols<S>> = '' | (U extends infer K
+//     ? K extends string
+//         ? `${K}${AllCombinations<never, Exclude<U, K>>}`
+//         : never
+//     : never
+//     )
+
 type ExtractSymbols<S extends string> = S extends `${infer First}${infer Rest}`? First | ExtractSymbols<Rest>: never
 type AllCombinations<S extends string, U extends string = ExtractSymbols<S>> = '' | {[K in U]: `${K}${AllCombinations<Exclude<U, K>>}`}[U];
 
