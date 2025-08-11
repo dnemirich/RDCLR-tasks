@@ -1,5 +1,7 @@
 // import {BadList, GoodList} from "./ListOptimization.tsx";
-import {BadContextExample, GoodContextExample} from "./ContextOptimization.tsx";
+// import {BadContextExample, GoodContextExample} from "./ContextOptimization.tsx";
+
+import {BadSlotsExample, GoodSlotsExample} from "./SlotOptimization.tsx";
 
 export const OptimizationTask = () => {
     return (
@@ -9,9 +11,14 @@ export const OptimizationTask = () => {
             {/*    <GoodList/>*/}
             {/*</div>*/}
             {/*<div style={{width: "100%", height: "2px", backgroundColor: 'black'}}></div>*/}
+            {/*<div style={{display: "flex", justifyContent: "space-around"}}>*/}
+            {/*    <BadContextExample/>*/}
+            {/*    <GoodContextExample/>*/}
+            {/*</div>*/}
+            {/*<div style={{width: "100%", height: "2px", backgroundColor: 'black'}}></div>*/}
             <div style={{display: "flex", justifyContent: "space-around"}}>
-                <BadContextExample/>
-                <GoodContextExample/>
+                <BadSlotsExample/>
+                <GoodSlotsExample/>
             </div>
         </div>
     )
