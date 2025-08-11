@@ -18,6 +18,7 @@ export const UseEffectsTask = () => {
 
     return (
         <div>
+            <h1>Use effect</h1>
             <button onClick={() => setShowTimer(!showTimer)}>Toggle Timer</button>
             {showTimer && <Timer/>}
         </div>

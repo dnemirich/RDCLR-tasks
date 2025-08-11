@@ -1,11 +1,14 @@
 import './App.css'
-import {UseEffectsTask} from "./week-3-react/use-effects/useEffectsTask.tsx";
+import {OptimizationTask} from "./week-3-react/optimization/OptimizationTask.tsx";
+// import {UseEffectsTask} from "./week-3-react/use-effects/useEffectsTask.tsx";
+
 
 function App() {
 
     return (
         <div>
-          <UseEffectsTask/>
+          {/*<UseEffectsTask/>*/}
+            <OptimizationTask/>
         </div>
     )
 }
