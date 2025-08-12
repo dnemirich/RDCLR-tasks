@@ -1,0 +1,27 @@
+.tooltipWrapper {
+    position: relative;
+    width: 300px;
+}
+
+.text {
+    font-size: 18px;
+}
+
+.text:hover {
+    cursor: pointer;
+}
+
+.tooltip {
+    position: absolute;
+    top: -20px;
+    right: 0;
+
+    background-color: rgba(51, 51, 51, 0.35);
+    border-radius: 5px;
+
+    width: 100px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
