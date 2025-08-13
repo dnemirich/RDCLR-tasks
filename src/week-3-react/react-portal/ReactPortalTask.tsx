@@ -15,7 +15,7 @@ export const ReactPortalTask = () => {
                     <p>Some text inside modal</p>
                 </Modal>
             </div>
-            <div style={{marginBottom: '200px', borderColor: 'red', overflow: 'hidden'}}>
+            <div style={{marginBottom: '200px', border: '1px solid red', overflow: 'hidden'}}>
                 <Dropdown/>
             </div>
             <div>
