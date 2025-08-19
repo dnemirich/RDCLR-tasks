@@ -1,15 +1,15 @@
 import {createPortal} from "react-dom";
 import {useUnit} from "effector-react/effector-react.umd";
-import {$gameStatus, $winner} from "../../model/game-model.ts";
 import {ResetButton} from "../ResetButton/ResetButton.tsx";
 
 import s from './WinModal.module.scss'
+import {$gameStatus, $winner} from "../../model/game-model.ts";
 
 export const WinModal = () => {
     const gameStatus = useUnit($gameStatus);
     const winner = useUnit($winner);
 
-    if (gameStatus !== 'win') return null;
+    if (gameStatus === 'in_progress') return null;
 
     return createPortal((
         <div className={s.overlay}>

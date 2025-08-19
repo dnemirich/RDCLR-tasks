@@ -1,5 +1,5 @@
 import {useUnit} from "effector-react";
-import {$board, cellClicked} from "../../model/board-model.ts";
+import {$board, cellClicked} from "../../model/game-model.ts";
 
 import s from './GameField.module.scss'
 import {Cell} from "./Cell/Cell.tsx";
