@@ -1,0 +1,14 @@
+.resetBtn {
+  font-size: 2rem;
+  text-transform: uppercase;
+  background-color: unset;
+  border: 0.1rem solid black;
+  padding: 1rem;
+
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    cursor: pointer;
+    background-color: rgba(204, 204, 204, 0.26);
+  }
+}
