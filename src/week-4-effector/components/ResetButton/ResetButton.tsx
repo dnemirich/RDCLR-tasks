@@ -1,4 +1,8 @@
 import {boardReset} from "../../model/game-model.ts";
 import s from './ResetButton.module.scss'
+import {useUnit} from "effector-react";
 
-export const ResetButton = () => <button className={s.resetBtn} onClick={() => boardReset()}>Reset</button>;
+export const ResetButton = () => {
+    const reset = useUnit(boardReset)
+    return <button className={s.resetBtn} onClick={reset}>Reset</button>;
+}

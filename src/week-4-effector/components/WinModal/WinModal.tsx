@@ -6,8 +6,7 @@ import s from './WinModal.module.scss'
 import {$gameStatus, $winner} from "../../model/game-model.ts";
 
 export const WinModal = () => {
-    const gameStatus = useUnit($gameStatus);
-    const winner = useUnit($winner);
+    const [gameStatus, winner] = useUnit([$gameStatus, $winner])
 
     if (gameStatus === 'in_progress') return null;
 

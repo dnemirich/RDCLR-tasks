@@ -5,14 +5,14 @@ import s from './GameField.module.scss'
 import {Cell} from "./Cell/Cell.tsx";
 
 export const GameField = () => {
-    const board = useUnit($board)
+    const [board, onClick] = useUnit([$board, cellClicked])
 
     return (
         <div className={s.board}>
             {
                 board.map((row, x) => (
                     row.map((cell, y) => (
-                        <Cell cell={cell} x={x} y={y} handleClick={cellClicked} key={`${x}-${y}`}/>
+                        <Cell cell={cell} x={x} y={y} handleClick={onClick} key={`${x}-${y}`}/>
                     ))
                 ))
             }
