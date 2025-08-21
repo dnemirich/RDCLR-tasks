@@ -1,4 +1,4 @@
-import {type CellType} from "../model/game-model.ts";
+import {type CellType} from "../model/game-model";
 
 export const checkWin = (board: string[][], x: number, y: number, currentPlayer: CellType): boolean => {
     const N = board.length;

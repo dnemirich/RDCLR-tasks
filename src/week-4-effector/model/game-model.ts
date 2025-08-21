@@ -1,5 +1,5 @@
 import {createEvent, createStore, sample} from "effector";
-import {checkWin} from "../utils/game-utils.ts";
+import {checkWin} from "../utils/game-utils";
 
 export type CellType = 'X' | 'O' | '';
 
@@ -21,7 +21,7 @@ export const $gameStatus = createStore<'tie' | 'win' | 'in_progress'>('in_progre
 export const $board = createStore<CellType[][]>(Array.from({length: 3}, () => Array(3).fill(''))).reset(boardReset)
 
 
-const $currentPlayer = $board.map(board => {
+export const $currentPlayer = $board.map(board => {
     const filled = board.flat().filter(c => c !== '').length;
     return filled % 2 === 0 ? 'X' : 'O';
 });

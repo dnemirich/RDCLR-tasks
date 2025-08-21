@@ -1,7 +1,7 @@
 import {createEffect, createStore, sample} from "effector";
-import {$winner} from "./game-model.ts";
+import {$winner} from "./game-model";
 
-const LS_KEY = 'tic-tac-toe-results';
+export const LS_KEY = 'tic-tac-toe-results';
 
 type Results = {
     X: number,
@@ -9,7 +9,7 @@ type Results = {
     Tie: number,
 }
 
-const getResultsFx = createEffect<void, Results>(() => {
+export const getResultsFx = createEffect<void, Results>(() => {
     const res = localStorage.getItem(LS_KEY)
     return res ? JSON.parse(res) : {'X': 0, 'O': 0, 'Tie': 0}
 })
