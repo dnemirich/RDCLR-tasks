@@ -7,7 +7,7 @@ export const cellClicked = createEvent<{ x: number, y: number }>();
 
 export const boardReset = createEvent();
 
-export const $winner = createStore<'X' | 'O' | 'Tie' | null>(null)
+export const $winner = createStore<'X' | 'O' | 'Tie' | null>(null).reset(boardReset);
 
 $winner.watch((newWinner) => {
     console.log('Winner changed:', newWinner);

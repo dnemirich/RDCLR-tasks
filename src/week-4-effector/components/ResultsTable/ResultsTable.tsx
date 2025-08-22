@@ -1,14 +1,11 @@
 import s from './ResultsTable.module.scss'
-import {$results, initializeResults} from "../../model/results-model.ts";
-import {useUnit} from "effector-react";
-import {memo, useEffect} from "react";
+import {$results, ResultsGate} from "../../model/results-model.ts";
+import {useGate, useUnit} from "effector-react";
+import {memo} from "react";
 
 export const ResultsTable = memo(() => {
     const results = useUnit($results)
-
-    useEffect(() => {
-        initializeResults()
-    }, []);
+    useGate(ResultsGate);
 
     return (
         <table className={s.table}>

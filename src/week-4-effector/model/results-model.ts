@@ -1,5 +1,6 @@
 import {createEffect, createStore, sample} from "effector";
 import {$winner} from "./game-model";
+import {createGate} from "effector-react";
 
 export const LS_KEY = 'tic-tac-toe-results';
 
@@ -9,6 +10,8 @@ type Results = {
     Tie: number,
 }
 
+export const ResultsGate = createGate();
+
 export const getResultsFx = createEffect<void, Results>(() => {
     const res = localStorage.getItem(LS_KEY)
     return res ? JSON.parse(res) : {'X': 0, 'O': 0, 'Tie': 0}
@@ -16,6 +19,12 @@ export const getResultsFx = createEffect<void, Results>(() => {
 
 export const $results = createStore<Results>({'X': 0, 'O': 0, 'Tie': 0})
     .on(getResultsFx.doneData, (_, result) => result)
+
+
+sample({
+    clock: ResultsGate.open,
+    target: getResultsFx
+})
 
 sample({
     clock: $results.updates,
@@ -41,7 +50,3 @@ sample({
     },
     target: $results
 })
-
-export const initializeResults = () => {
-    getResultsFx();
-};
