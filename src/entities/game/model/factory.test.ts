@@ -1,13 +1,6 @@
 import { allSettled, fork } from 'effector';
 
-import {
-  $board,
-  $currentPlayer,
-  $gameStatus,
-  $winner,
-  boardReset,
-  cellClicked,
-} from './game-model.ts';
+import { createGameModel, type GameModel } from './factory';
 
 const emptyBoard = [
   ['', '', ''],
@@ -28,6 +21,34 @@ const xWinBoard = [
 ];
 
 describe('Game model', () => {
+  let model: GameModel;
+  let cellClicked: GameModel['cellClicked'];
+  let boardReset: GameModel['boardReset'];
+  let $board: GameModel['$board'];
+  let $currentPlayer: GameModel['$currentPlayer'];
+  let $winner: GameModel['$winner'];
+  let $gameStatus: GameModel['$gameStatus'];
+  let $results: GameModel['$results'];
+  let ResultsGate: GameModel['ResultsGate'];
+
+  const gameId = 'test-game-1';
+  const LS_KEY = `tic-tac-toe-results-${gameId}`;
+
+  beforeEach(() => {
+    localStorage.clear();
+    model = createGameModel(gameId);
+    ({
+      $board,
+      $currentPlayer,
+      $gameStatus,
+      $results,
+      $winner,
+      boardReset,
+      cellClicked,
+      ResultsGate,
+    } = model);
+  });
+
   test('should update the board on the click', async () => {
     const scope = fork();
 
@@ -114,5 +135,43 @@ describe('Game model', () => {
     expect(scope.getState($board)).toEqual(firstBoard);
 
     expect(scope.getState($currentPlayer)).toBe('O');
+  });
+
+  test('should initialize with default values if localStorage is empty', async () => {
+    const scope = fork();
+
+    await allSettled(ResultsGate.open, { scope });
+
+    expect(scope.getState($results)).toEqual({ O: 0, Tie: 0, X: 0 });
+  });
+
+  test('should initialize with values from localStorage', async () => {
+    localStorage.setItem(LS_KEY, JSON.stringify({ O: 2, Tie: 5, X: 4 }));
+
+    const scope = fork();
+
+    await allSettled(ResultsGate.open, { scope });
+
+    expect(scope.getState($results)).toEqual({ O: 2, Tie: 5, X: 4 });
+  });
+
+  test('should save results to localStorage', async () => {
+    const scope = fork();
+
+    await allSettled($results, { params: { O: 0, Tie: 0, X: 1 }, scope });
+
+    expect(JSON.parse(localStorage.getItem(LS_KEY)!)).toEqual({
+      O: 0,
+      Tie: 0,
+      X: 1,
+    });
+  });
+
+  test('should not update results when there is no winner', async () => {
+    const scope = fork({ values: [[$results, { O: 1, Tie: 1, X: 1 }]] });
+
+    await allSettled($winner, { params: null, scope });
+
+    expect(scope.getState($results)).toEqual({ O: 1, Tie: 1, X: 1 });
   });
 });
