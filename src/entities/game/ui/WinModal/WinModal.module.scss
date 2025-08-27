@@ -1,0 +1,27 @@
+.overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(62, 62, 62, 0.6);
+}
+
+.modal {
+  position: fixed;
+  top: 40%;
+  left: 40%;
+
+  padding: 2rem;
+  border-radius: 1rem;
+
+  background-color: #d3d392;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.winner {
+  font-size: 2rem;
+  font-weight: bold;
+}

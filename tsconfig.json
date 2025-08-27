@@ -1,4 +1,15 @@
 {
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "baseUrl": "src",
+    "paths": {
+      "app/*": ["app/*"],
+      "entities/*": ["entities/*"],
+      "features/*": ["features/*"],
+      "shared/*": ["shared/*"],
+      "widgets/*": ["widgets/*"]
+    }
+  },
   "files": [],
   "references": [
     { "path": "./tsconfig.app.json" },
