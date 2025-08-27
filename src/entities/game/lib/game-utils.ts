@@ -1,4 +1,4 @@
-import { type CellType } from '../model/game-model.ts';
+import { type CellType } from '../model';
 
 export const checkWin = (
   board: string[][],

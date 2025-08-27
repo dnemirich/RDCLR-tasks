@@ -12,9 +12,9 @@ export const $winner = createStore<'O' | 'Tie' | 'X' | null>(null).reset(
   boardReset
 );
 
-$winner.watch((newWinner) => {
-  console.log('Winner changed:', newWinner);
-});
+// $winner.watch((newWinner) => {
+//   console.log('Winner changed:', newWinner);
+// });
 
 export const $gameStatus = createStore<'in_progress' | 'tie' | 'win'>(
   'in_progress'
@@ -37,13 +37,11 @@ sample({
   clock: cellClicked,
   fn: ({ board, currentPlayer }, { x, y }) => {
     if (board[x][y] !== '') return board;
-    const newBoard = board.map((row, rowIndex) => {
+    return board.map((row, rowIndex) => {
       return row.map((cell, colIndex) => {
         return rowIndex === x && colIndex === y ? currentPlayer : cell;
       });
     });
-
-    return newBoard;
   },
   source: { board: $board, currentPlayer: $currentPlayer },
   target: $board,

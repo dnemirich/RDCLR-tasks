@@ -1,6 +1,6 @@
 import { allSettled, fork } from 'effector';
+import { $winner } from 'entities/game';
 
-import { $winner } from '../../game/model/game-model.ts';
 import { $results, getResultsFx, LS_KEY } from './results-model.ts';
 
 describe('Results model', () => {
