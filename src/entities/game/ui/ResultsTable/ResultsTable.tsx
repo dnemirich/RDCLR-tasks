@@ -1,12 +1,16 @@
-import { useGate, useUnit } from 'effector-react';
-import { memo } from 'react';
+import { useGate } from 'effector-react';
 
-import { $results, ResultsGate } from '../../model';
+import type { GameModel, Results } from '../../model';
+
 import s from './ResultsTable.module.scss';
 
-export const ResultsTable = memo(() => {
-  const results = useUnit($results);
-  useGate(ResultsGate);
+type Props = {
+  gate: GameModel['ResultsGate'];
+  results: Results;
+};
+
+export const ResultsTable = ({ gate, results }: Props) => {
+  useGate(gate);
 
   return (
     <table className={s.table}>
@@ -26,4 +30,4 @@ export const ResultsTable = memo(() => {
       </tbody>
     </table>
   );
-});
+};

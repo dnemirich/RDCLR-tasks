@@ -1,13 +1,16 @@
-import { useUnit } from 'effector-react/effector-react.umd';
 import { createPortal } from 'react-dom';
 
-import { $gameStatus, $winner } from '../../model';
+import type { GameStatus, Winner } from '../../model';
+
 import { ResetButton } from '../ResetButton';
 import s from './WinModal.module.scss';
 
-export const WinModal = () => {
-  const [gameStatus, winner] = useUnit([$gameStatus, $winner]);
-
+type Props = {
+  gameStatus: GameStatus;
+  onBoardReset: () => void;
+  winner: Winner;
+};
+export const WinModal = ({ gameStatus, onBoardReset, winner }: Props) => {
   if (gameStatus === 'in_progress') return null;
 
   return createPortal(
@@ -23,7 +26,7 @@ export const WinModal = () => {
           )}
 
           <p>Press button to restart the game</p>
-          <ResetButton />
+          <ResetButton onClick={onBoardReset} />
         </div>
       </div>
     </div>,

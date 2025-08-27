@@ -1,12 +1,12 @@
-import { useUnit } from 'effector-react';
-
-import { boardReset } from '../../model';
 import s from './ResetButton.module.scss';
 
-export const ResetButton = () => {
-  const reset = useUnit(boardReset);
+type Props = {
+  onClick: () => void;
+};
+
+export const ResetButton = ({ onClick }: Props) => {
   return (
-    <button className={s.resetBtn} onClick={reset}>
+    <button className={s.resetBtn} onClick={onClick}>
       Reset
     </button>
   );
