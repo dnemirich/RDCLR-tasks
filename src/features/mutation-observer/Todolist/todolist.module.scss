@@ -1,0 +1,38 @@
+.todo {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+
+.taskList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+
+.task {
+  display: flex;
+  gap: 1rem;
+  font-size: 1.6rem;
+
+  & > input {
+    width: 2rem;
+    height: 2rem;
+  }
+}
+
+.completed {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+.submitForm {
+  display: flex;
+  gap: 1.5rem;
+
+  & > button {
+    padding: 0.4rem 2rem;
+  }
+}
