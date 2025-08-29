@@ -1,1 +1,0 @@
-export { WinModal } from './WinModal';
