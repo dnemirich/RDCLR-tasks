@@ -1,0 +1,15 @@
+.noteCard {
+  width: 20rem;
+  height: 20rem;
+  padding: 1rem;
+
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
+
+  overflow: hidden;
+}
+
+.text {
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
