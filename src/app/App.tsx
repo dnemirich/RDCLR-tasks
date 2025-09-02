@@ -5,30 +5,17 @@ import {
   Notification,
   type NotificationType,
 } from 'features/notify-note-creation';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { createPortal } from 'react-dom';
-import { notesChannel } from 'shared/lib/broadcastChannel.ts';
 import { NotesList } from 'widgets/notes-list';
 
 import s from './App.module.scss';
 
 function App() {
-  const { addNote, notes } = useNotes();
   const [notifications, setNotifications] = useState<NotificationType[]>([]);
-
-  useEffect(() => {
-    const listener = (event: MessageEvent) => {
-      if (event.data.type !== 'add-note') return;
-
-      setNotifications((prev) => [
-        ...prev,
-        displayNotification(event.data.payload),
-      ]);
-    };
-    notesChannel.addEventListener('message', listener);
-
-    return () => notesChannel.removeEventListener('message', listener);
-  }, []);
+  const { addNote, notes } = useNotes((note) =>
+    setNotifications((prev) => [...prev, displayNotification(note)])
+  );
 
   const onAddNote = (text: string) => {
     addNote({ content: text, id: new Date().toISOString() });
