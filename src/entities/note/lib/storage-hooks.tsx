@@ -9,8 +9,15 @@ export const useNotes = () => {
   const [notes, setNotes] = useState<NoteType[]>([]);
 
   useEffect(() => {
-    const items = getItems();
-    setNotes(items);
+    setNotes(getItems());
+
+    const listener = (event: MessageEvent) => {
+      if (event.data.type !== 'add-note') return;
+      setNotes((prev) => [ event.data.payload, ...prev]);
+    };
+    notesChannel.addEventListener('message', listener);
+
+    return () => notesChannel.removeEventListener('message', listener);
   }, []);
 
   const addNote = (note: NoteType) => {
