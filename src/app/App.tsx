@@ -1,41 +1,21 @@
 import { useNotes } from 'entities/note';
 import { AddForm } from 'features/add-note';
-import {
-  displayNotification,
-  Notification,
-  type NotificationType,
-} from 'features/notify-note-creation';
-import { useEffect, useState } from 'react';
+import { Notification, useNotification } from 'features/notify-note-creation';
 import { createPortal } from 'react-dom';
-import { notesChannel } from 'shared/lib/broadcastChannel.ts';
 import { NotesList } from 'widgets/notes-list';
 
 import s from './App.module.scss';
 
 function App() {
   const { addNote, notes } = useNotes();
-  const [notifications, setNotifications] = useState<NotificationType[]>([]);
-
-  useEffect(() => {
-    const listener = (event: MessageEvent) => {
-      if (event.data.type !== 'add-note') return;
-      setNotifications((prev) => [
-        ...prev,
-        displayNotification(event.data.payload),
-      ]);
-    };
-    notesChannel.addEventListener('message', listener);
-    return () => notesChannel.removeEventListener('message', listener);
-  }, []);
+  const { notifications, removeNotification } = useNotification();
 
   const onAddNote = (text: string) => {
     addNote({ content: text, id: new Date().toISOString() });
   };
 
-  const removeNotification = (id: string) => {
-    setNotifications((prev) =>
-      prev.filter((notification) => notification.id !== id)
-    );
+  const onRemoveNotification = (id: string) => {
+    removeNotification(id);
   };
 
   return (
@@ -52,7 +32,7 @@ function App() {
               <Notification
                 key={notification.id}
                 notification={notification}
-                onClose={() => removeNotification(notification.id)}
+                onClose={() => onRemoveNotification(notification.id)}
               />
             ))}
           </div>,
