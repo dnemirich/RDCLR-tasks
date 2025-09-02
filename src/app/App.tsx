@@ -1,25 +1,32 @@
-import { type NoteType, useNotes } from 'entities/note';
+import { useNotes } from 'entities/note';
 import { AddForm } from 'features/add-note';
 import {
   displayNotification,
   Notification,
   type NotificationType,
 } from 'features/notify-note-creation';
-import { useCallback, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
+import { notesChannel } from 'shared/lib/broadcastChannel.ts';
 import { NotesList } from 'widgets/notes-list';
 
 import s from './App.module.scss';
 
 function App() {
+  const { addNote, notes } = useNotes();
   const [notifications, setNotifications] = useState<NotificationType[]>([]);
-  const handleSideAdd = useCallback(
-    (note: NoteType) =>
-      setNotifications((prev) => [...prev, displayNotification(note)]),
-    []
-  );
 
-  const { addNote, notes } = useNotes(handleSideAdd);
+  useEffect(() => {
+    const listener = (event: MessageEvent) => {
+      if (event.data.type !== 'add-note') return;
+      setNotifications((prev) => [
+        ...prev,
+        displayNotification(event.data.payload),
+      ]);
+    };
+    notesChannel.addEventListener('message', listener);
+    return () => notesChannel.removeEventListener('message', listener);
+  }, []);
 
   const onAddNote = (text: string) => {
     addNote({ content: text, id: new Date().toISOString() });
