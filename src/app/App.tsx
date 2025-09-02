@@ -1,11 +1,11 @@
-import { useNotes } from 'entities/note';
+import { type NoteType, useNotes } from 'entities/note';
 import { AddForm } from 'features/add-note';
 import {
   displayNotification,
   Notification,
   type NotificationType,
 } from 'features/notify-note-creation';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { NotesList } from 'widgets/notes-list';
 
@@ -13,9 +13,13 @@ import s from './App.module.scss';
 
 function App() {
   const [notifications, setNotifications] = useState<NotificationType[]>([]);
-  const { addNote, notes } = useNotes((note) =>
-    setNotifications((prev) => [...prev, displayNotification(note)])
+  const handleSideAdd = useCallback(
+    (note: NoteType) =>
+      setNotifications((prev) => [...prev, displayNotification(note)]),
+    []
   );
+
+  const { addNote, notes } = useNotes(handleSideAdd);
 
   const onAddNote = (text: string) => {
     addNote({ content: text, id: new Date().toISOString() });
