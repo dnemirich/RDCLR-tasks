@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { notesChannel } from 'shared/lib/broadcastChannel.ts';
 
 import type { NoteType } from '../model';
 
@@ -14,6 +15,7 @@ export const useNotes = () => {
 
   const addNote = (note: NoteType) => {
     addItem(note);
+    notesChannel.postMessage({ payload: note, type: 'add-note' });
     setNotes(getItems());
   };
 

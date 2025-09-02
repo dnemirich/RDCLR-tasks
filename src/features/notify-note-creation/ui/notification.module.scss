@@ -1,0 +1,46 @@
+.notification {
+  background-color: #91b859;
+
+  width: 20rem;
+  padding: 2rem;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.heading {
+  font-weight: 600;
+
+  margin-bottom: 1.5rem;
+}
+
+.btn {
+  background-color: unset;
+  border: none;
+  cursor: pointer;
+
+  align-self: flex-end;
+  margin-bottom: 1.5rem;
+
+  &:hover {
+    opacity: 0.6;
+  }
+}
+
+
+.date {
+  font-size: 1.2rem;
+  color: #6c6c6c;
+
+  align-self: flex-end;
+}
+
+
+.content {
+  font-size: 1.6rem;
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: break-word;
+
+  margin-bottom: 1.5rem;
+}
