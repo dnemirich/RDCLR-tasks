@@ -1,14 +1,16 @@
-import { useNotes } from 'entities/note';
+import { useGate, useUnit } from 'effector-react';
+import { $notes, noteAddedLocally, NotesGate } from 'entities/note';
 import { AddForm } from 'features/add-note';
-import { Notification, useNotification } from 'features/notify-note-creation';
+import { $notifications, Notification, notificationRemoved } from 'features/notify-note-creation';
 import { createPortal } from 'react-dom';
 import { NotesList } from 'widgets/notes-list';
 
 import s from './App.module.scss';
 
 function App() {
-  const { addNote, notes } = useNotes();
-  const { notifications, removeNotification } = useNotification();
+  useGate(NotesGate);
+
+  const [notes, notifications, removeNotification, addNote] = useUnit([$notes, $notifications, notificationRemoved, noteAddedLocally]);
 
   const onAddNote = (text: string) => {
     addNote({ content: text, id: new Date().toISOString() });
