@@ -1,0 +1,47 @@
+.booksContainer {
+  max-width: 120rem;
+  display: flex;
+}
+
+
+.bookList {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+
+}
+
+.book {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+
+  width: 20rem;
+  min-height: 20rem;
+  height: 100%;
+
+  padding: 2rem;
+
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
+
+  & > p {
+    white-space: normal;
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+}
+
+
+.title {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+
+.author {
+  color: #777;
+  font-size: 1.4rem;
+}

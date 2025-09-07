@@ -31,5 +31,6 @@
 - Factory principle using Effector
 - IntersectionObserver, ResizeObserver, MutationObserver
 
-### Week 6 - React
+### Week 6 - React, Effector
 - Web-storages
+- Fetch, AbortController
