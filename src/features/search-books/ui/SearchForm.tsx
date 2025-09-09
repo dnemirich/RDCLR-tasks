@@ -1,36 +1,16 @@
-import { useEffect, useRef, useState } from 'react';
+import { useUnit } from 'effector-react';
+import { $query, queryChanged } from 'shared/store/store.ts';
 
-type Props = {
-  onSearch: (query: string, signal: AbortSignal) => void;
-};
-
-export const SearchForm = ({ onSearch }: Props) => {
-  const [query, setQuery] = useState('');
-  const controllerRef = useRef<AbortController | null>(null)
-
-  useEffect(() => {
-    if (!query) return;
-
-    const timeout = setTimeout(() => {
-      if (controllerRef.current) {
-        console.log('aborting previous request')
-        controllerRef.current?.abort()
-      }
-
-      const controller = new AbortController();
-      controllerRef.current = controller
-
-      onSearch(query, controller.signal);
-
-    }, 500)
-
-    return () => clearTimeout(timeout);
-
-  }, [query, onSearch]);
+export const SearchForm = () => {
+  const [query, onQueryChange] = useUnit([$query, queryChanged]);
 
   return (
     <div>
-      <input onChange={e => setQuery(e.target.value)} type="text" value={query}/>
+      <input
+        onChange={(e) => onQueryChange(e.target.value)}
+        type="text"
+        value={query}
+      />
     </div>
   );
 };

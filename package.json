@@ -15,8 +15,11 @@
   },
   "dependencies": {
     "@types/jest": "^30.0.0",
+    "effector": "^23.4.2",
+    "effector-react": "^23.3.0",
     "eslint-plugin-perfectionist": "^4.15.0",
     "jest": "^30.0.5",
+    "patronum": "^2.3.0",
     "prettier": "^3.6.2",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",

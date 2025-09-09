@@ -1,33 +1,20 @@
-import type { Book } from 'shared/utils/types.ts';
-
+import { useUnit } from 'effector-react';
 import { SearchForm } from 'features/search-books';
-import { useCallback, useState } from 'react';
+import { $books } from 'shared/store/store.ts';
 import { BookList } from 'widgets/BookList';
 
 import s from './App.module.scss';
 
-const API_URL = "https://www.googleapis.com/books/v1"
-
 function App() {
-  const [books, setBooks] = useState<Book[]>([]);
-
-  const handleSearch = useCallback(async (query: string, signal: AbortSignal) => {
-    try {
-      const response = await fetch(`${API_URL}/volumes?q=${query}`, {signal});
-      const data = await response.json();
-      setBooks(data.items);
-    } catch (error) {
-      console.error(error);
-    }
-  }, [])
+  const books = useUnit($books);
 
   return (
     <div className={s.container}>
       <header>
-        <SearchForm onSearch={handleSearch}/>
+        <SearchForm />
       </header>
       <main>
-        <BookList books={books}/>
+        <BookList books={books} />
       </main>
     </div>
   );
