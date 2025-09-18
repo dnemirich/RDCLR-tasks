@@ -31,5 +31,11 @@
 - Factory principle using Effector
 - IntersectionObserver, ResizeObserver, MutationObserver
 
-### Week 6 - React
+### Week 6 - React, Effector
 - Web-storages
+
+### Week 7 - React, Effector
+- Abort Controller
+
+### Week 8 - Next.js
+- SSR, getServerSideProps
